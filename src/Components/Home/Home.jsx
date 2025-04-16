@@ -1,9 +1,11 @@
 import Nav from "../Shared/Nav";
+import Banner from "./Banner";
 
 const Home = () => {
     return (
         <div>
-            <Nav></Nav>
+            <Banner></Banner>
+            
         </div>
     );
 };

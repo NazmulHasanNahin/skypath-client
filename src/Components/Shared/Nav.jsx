@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, Link } from "react-router-dom";
 
 const Nav = () => {
     const location = useLocation();
@@ -53,7 +53,7 @@ const Nav = () => {
                             </div>
                         </ul>
                     </div>
-                    <NavLink to="/" className="text-2xl font-bold text-gray-800">Book Vault</NavLink>
+                    <NavLink to="/" className="text-2xl font-bold text-gray-800">SkyPath</NavLink>
                 </div>
                 {/* here start for pc */}
                 <div className="navbar-center hidden lg:flex">
@@ -86,11 +86,22 @@ const Nav = () => {
                     </ul>
                 </div>
                 <div className="navbar-end space-x-2">
-                    <div className="p-2 bg-[#23be0a] rounded-lg justify-center items-center gap-2.5 inline-flex">
-                        <button className="text-center text-white text-lg font-semibold font-['Work Sans']">Sign In</button>
-                    </div>
-                    <div className="p-2 bg-[#59c6d2] rounded-lg justify-center items-center gap-2.5 inline-flex">
-                        <button className="text-center text-white text-lg font-semibold font-['Work Sans']">Sign Up</button>
+                    <div className="flex gap-4">
+                        <Link to="/signin">
+                            <div className="p-2 bg-[#23be0a] rounded-lg inline-flex justify-center items-center gap-2.5">
+                                <button className="text-center text-white text-lg font-semibold font-['Work Sans']">
+                                    Sign In
+                                </button>
+                            </div>
+                        </Link>
+
+                        <Link to="/signup">
+                            <div className="p-2 bg-[#59c6d2] rounded-lg inline-flex justify-center items-center gap-2.5">
+                                <button className="text-center text-white text-lg font-semibold font-['Work Sans']">
+                                    Sign Up
+                                </button>
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </div>

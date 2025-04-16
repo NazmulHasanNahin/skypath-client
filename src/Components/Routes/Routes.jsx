@@ -7,6 +7,8 @@ import Errorpage from "../Shared/ErrorPage";
 import Home from "../Home/Home";
 import AllTouristspot from "../AllTouristspot/AllTouristspot";
 import AddTouristSpot from "../AddTouristSpot/AddTouristSpot";
+import SignIn from "../Auth/SignIn";
+import Signup from "../Auth/Signup";
 
 
 const Routes = createBrowserRouter([
@@ -26,6 +28,14 @@ const Routes = createBrowserRouter([
             {
                 path: "/addspots",
                 element: <AddTouristSpot></AddTouristSpot>,
+            },
+            {
+                path: "/signin",
+                element: <SignIn></SignIn> ,
+            },
+            {
+                path: "/signup",
+                element: <Signup></Signup>,
             },
             
             
