@@ -37,16 +37,16 @@ const Nav = () => {
                                     </li>
                                     <li>
                                         <NavLink
-                                            to="/listed-books"
-                                            className={`btn ${isActive("/listed-books") ? "bg-[#23be0a] text-white" : "btn-ghost"}`}>
-                                            Listed Books
+                                            to="/addspots"
+                                            className={`btn ${isActive("/addspots") ? "bg-[#23be0a] text-white" : "btn-ghost"}`}>
+                                            Add Tourist Spot
                                         </NavLink>
                                     </li>
                                     <li>
                                         <NavLink
-                                            to="/pages-to-read"
-                                            className={`btn ${isActive("/pages-to-read") ? "bg-[#23be0a] text-white" : "btn-ghost"}`}>
-                                            Pages to Read
+                                            to="/allspots"
+                                            className={`btn ${isActive("/allspots") ? "bg-[#23be0a] text-white" : "btn-ghost"}`}>
+                                            All Tourist Spots
                                         </NavLink>
                                     </li>
                                 </ul>
@@ -69,16 +69,16 @@ const Nav = () => {
                                 </li>
                                 <li>
                                     <NavLink
-                                        to="/listed-books"
-                                        className={`btn ${isActive("/listed-books") ? "bg-[#23be0a] text-white" : "btn-ghost"}`}>
-                                        Listed Books
+                                        to="/addspots"
+                                        className={`btn ${isActive("/addspots") ? "bg-[#23be0a] text-white" : "btn-ghost"}`}>
+                                        Add Tourist Spot
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink
-                                        to="/pages-to-read"
-                                        className={`btn ${isActive("/pages-to-read") ? "bg-[#23be0a] text-white" : "btn-ghost"}`}>
-                                        Pages to Read
+                                        to="/allspots"
+                                        className={`btn ${isActive("/allspots") ? "bg-[#23be0a] text-white" : "btn-ghost"}`}>
+                                        All Tourist Spots
                                     </NavLink>
                                 </li>
                             </ul>
