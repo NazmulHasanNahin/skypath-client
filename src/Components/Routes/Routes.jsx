@@ -9,6 +9,7 @@ import AllTouristspot from "../AllTouristspot/AllTouristspot";
 import AddTouristSpot from "../AddTouristSpot/AddTouristSpot";
 import SignIn from "../Auth/SignIn";
 import Signup from "../Auth/Signup";
+import CountrySpots from "../CountrySpots/CountrySpots";
 
 
 const Routes = createBrowserRouter([
@@ -37,6 +38,10 @@ const Routes = createBrowserRouter([
             {
                 path: "/signup",
                 element: <Signup></Signup>,
+            },
+            {
+                path: "/country/:name",
+                element:<CountrySpots></CountrySpots> ,
             },
             
             

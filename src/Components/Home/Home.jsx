@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import Nav from "../Shared/Nav";
 import Banner from "./Banner";
-import TouristSpots from "./TouristSpots";
+import TouristSpots from "./CountryName";
 
 const Home = () => {
     const allcountry = useLoaderData();

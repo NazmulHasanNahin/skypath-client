@@ -1,49 +1,74 @@
-import React, { useState } from 'react';
 import { Helmet } from "react-helmet-async";
+import Swal from 'sweetalert2';
+
+
+
 const AddTouristSpot = () => {
-  const [formData, setFormData] = useState({
-    image: '',
-    tourists_spot_name: '',
-    country_Name: '',
-    location: '',
-    short_description: '',
-    average_cost: '',
-    seasonality: '',
-    travel_time: '',
-    totalVisitorsPerYear: '',
-    userEmail: '',
-    userName: '',
-  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  const handleaddTouristSpot = event => {
+    event.preventDefault();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // handle the form submission logic here
-    console.log(formData);
-  };
+    const form = event.target;
+    const image = form.image.value;
+    const tourists_spot_name = form.tourists_spot_name.value;
+    const country_Name = form.country_Name.value;
+    const location = form.location.value;
+    const short_description = form.short_description.value;
+    const average_cost = form.average_cost.value;
+    const seasonality = form.seasonality.value;
+    const travel_time = form.travel_time.value;
+    const totalVisitorsPerYear = form.totalVisitorsPerYear.value;
+    const userEmail = form.userEmail.value;
+    const userName = form.userName.value;
+
+
+    const newSpot = {
+      image, tourists_spot_name, country_Name,
+      location, short_description, average_cost, seasonality,
+      travel_time, totalVisitorsPerYear, userEmail, userName
+    };
+    console.log(newSpot);
+
+    fetch("http://localhost:5000/add-spots", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(newSpot)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          Swal.fire({
+            title: "Spot Added Successfully !!",
+            icon: "success"
+          });
+        }
+        else {
+          Swal.fire({
+            title: "Failed to Add Spot!!",
+            icon: "error"
+          });
+        }
+      })
+
+  }
+
 
   return (
     <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-center">
-        <Helmet><title>Add Tourist Spot</title></Helmet>
+      <Helmet><title>Add Tourist Spot</title></Helmet>
       <div className="w-full max-w-xl bg-white rounded-lg shadow-lg p-8">
         <h1 className="text-3xl font-semibold text-center text-indigo-600 mb-6">Add Tourist Spot</h1>
-        
-        <form onSubmit={handleSubmit}>
+
+        <form onSubmit={handleaddTouristSpot}>
           {/* Image URL */}
           <div className="mb-4">
             <label className="block text-gray-700 font-medium mb-2">Image URL</label>
             <input
               type="url"
               name="image"
-              value={formData.image}
-              onChange={handleChange}
+
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Enter image URL"
               required
@@ -56,8 +81,6 @@ const AddTouristSpot = () => {
             <input
               type="text"
               name="tourists_spot_name"
-              value={formData.tourists_spot_name}
-              onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Enter spot name"
               required
@@ -67,16 +90,21 @@ const AddTouristSpot = () => {
           {/* Country Name */}
           <div className="mb-4">
             <label className="block text-gray-700 font-medium mb-2">Country Name</label>
-            <input
-              type="text"
+            <select
               name="country_Name"
-              value={formData.country_Name}
-              onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="Enter country name"
               required
-            />
+            >
+              <option value="">Select a country</option>
+              <option value="Bangladesh">Bangladesh</option>
+              <option value="Thailand">Thailand</option>
+              <option value="Indonesia">Indonesia</option>
+              <option value="Malaysia">Malaysia</option>
+              <option value="Vietnam">Vietnam</option>
+              <option value="Singapore">Singapore</option>
+            </select>
           </div>
+
 
           {/* Location */}
           <div className="mb-4">
@@ -84,8 +112,6 @@ const AddTouristSpot = () => {
             <input
               type="text"
               name="location"
-              value={formData.location}
-              onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Enter location"
               required
@@ -97,8 +123,6 @@ const AddTouristSpot = () => {
             <label className="block text-gray-700 font-medium mb-2">Short Description</label>
             <textarea
               name="short_description"
-              value={formData.short_description}
-              onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Write a short description"
               rows="4"
@@ -112,8 +136,6 @@ const AddTouristSpot = () => {
             <input
               type="number"
               name="average_cost"
-              value={formData.average_cost}
-              onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Enter average cost"
               required
@@ -125,8 +147,6 @@ const AddTouristSpot = () => {
             <label className="block text-gray-700 font-medium mb-2">Seasonality</label>
             <select
               name="seasonality"
-              value={formData.seasonality}
-              onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               required
             >
@@ -144,8 +164,6 @@ const AddTouristSpot = () => {
             <input
               type="text"
               name="travel_time"
-              value={formData.travel_time}
-              onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Enter travel time"
               required
@@ -158,8 +176,6 @@ const AddTouristSpot = () => {
             <input
               type="number"
               name="totalVisitorsPerYear"
-              value={formData.totalVisitorsPerYear}
-              onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Enter total visitors per year"
               required
@@ -172,8 +188,6 @@ const AddTouristSpot = () => {
             <input
               type="email"
               name="userEmail"
-              value={formData.userEmail}
-              onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Enter your email"
               required
@@ -186,8 +200,6 @@ const AddTouristSpot = () => {
             <input
               type="text"
               name="userName"
-              value={formData.userName}
-              onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Enter your name"
               required
