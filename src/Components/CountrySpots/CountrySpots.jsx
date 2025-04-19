@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { GridLoader, PacmanLoader } from "react-spinners";
 
@@ -23,7 +23,6 @@ const CountrySpots = () => {
                 Tourist Spots in {name}
             </h2>
 
-            {/* Loading state */}
             {loading && (
                 <div className="flex justify-center items-center h-[50vh]">
                     <GridLoader />
@@ -31,33 +30,47 @@ const CountrySpots = () => {
             )}
 
 
-            {/* Spots grid */}
             {!loading && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {spots.length === 0 ? (
-                        <p className="text-center text-xl text-red-500 font-semibold mt-10">
-                            No tourist spots found for {name}
+                {spots.length === 0 ? (
+                  <p className="text-center text-xl text-red-500 font-semibold mt-10">
+                    No tourist spots found for {name}
+                  </p>
+                ) : (
+                  spots.map((spot) => (
+                    <div
+                      key={spot._id}
+                      className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300"
+                    >
+                      <img
+                        src={spot.image}
+                        alt={spot.tourists_spot_name}
+                        className="w-full h-56 object-cover"
+                      />
+                      <div className="p-5">
+                        <h3 className="text-2xl font-bold text-indigo-700 mb-2">
+                          {spot.tourists_spot_name}
+                        </h3>
+                        <p className="text-sm text-gray-600 mb-1">
+                          📍 {spot.location}, {spot.country_Name}
                         </p>
-                    ) : (
-                        spots.map((spot) => (
-                            <div
-                                key={spot._id}
-                                className="bg-white p-5 rounded-xl shadow-lg hover:shadow-xl transition duration-300"
-                            >
-                                <h3 className="text-xl font-semibold">{spot.tourists_spot_name}</h3>
-                                <p className="text-sm text-gray-600 mb-2">{spot.location}</p>
-                                <p className="text-sm">{spot.short_description}</p>
-                                <p className="text-sm mt-1 font-medium">
-                                    Cost: ${spot.average_cost}
-                                </p>
-                                <p className="text-sm">Season: {spot.seasonality}</p>
-                                <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                                    View Details
-                                </button>
-                            </div>
-                        ))
-                    )}
-                </div>
+                        <p className="text-sm text-gray-500 line-clamp-2">
+                          {spot.short_description}
+                        </p>
+              
+                        <div className="mt-4 flex justify-between items-center">
+                          <span className="text-sm font-medium text-green-600">
+                            Season: {spot.seasonality}
+                          </span>
+                          <Link to={`/spot/${spot._id}`} className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-200 text-sm">
+                            Details
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
             )}
         </div>
     );

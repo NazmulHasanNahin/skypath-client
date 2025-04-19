@@ -10,6 +10,7 @@ import AddTouristSpot from "../AddTouristSpot/AddTouristSpot";
 import SignIn from "../Auth/SignIn";
 import Signup from "../Auth/Signup";
 import CountrySpots from "../CountrySpots/CountrySpots";
+import SpotDetails from "../AllTouristspot/SpotDetails";
 
 
 const Routes = createBrowserRouter([
@@ -42,6 +43,10 @@ const Routes = createBrowserRouter([
             {
                 path: "/country/:name",
                 element:<CountrySpots></CountrySpots> ,
+            },
+            {
+                path: "/spot/:id",
+                element:<SpotDetails></SpotDetails> ,
             },
             
             
