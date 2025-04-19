@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 
 const CountryName = ({ allcountry }) => {
-  console.log(allcountry);
+  // console.log(allcountry);
   return (
     <div className="px-4 md:px-12 lg:px-20 py-10">
       <h2 className="text-3xl md:text-4xl font-bold mb-8  text-center">Top Tourist Countries</h2>

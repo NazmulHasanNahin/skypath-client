@@ -1,8 +1,22 @@
+import { useContext } from "react";
 import { NavLink, useLocation, Link } from "react-router-dom";
+import { AuthContext } from "../Provider/Authprovider";
+import { toast } from 'sonner';
 
 const Nav = () => {
     const location = useLocation();
     const isActive = (path) => location.pathname === path;
+
+    const { user, logout } = useContext(AuthContext);
+
+
+    const handlelogout = () => {
+        logout()
+            .then(result => {
+                toast.success('Successfully logged out');
+                console.log(result.user);
+            })
+    }
 
     return (
         <div>
@@ -85,26 +99,48 @@ const Nav = () => {
                         </div>
                     </ul>
                 </div>
-                <div className="navbar-end space-x-2">
-                    <div className="flex gap-4">
-                        <Link to="/signin">
-                            <div className="p-2 bg-[#23be0a] rounded-lg inline-flex justify-center items-center gap-2.5">
-                                <button className="text-center text-white text-lg font-semibold font-['Work Sans']">
-                                    Sign In
-                                </button>
-                            </div>
-                        </Link>
 
-                        <Link to="/signup">
-                            <div className="p-2 bg-[#59c6d2] rounded-lg inline-flex justify-center items-center gap-2.5">
-                                <button className="text-center text-white text-lg font-semibold font-['Work Sans']">
-                                    Sign Up
-                                </button>
+                <div className="navbar-end space-x-4">
+                    {user ? (
+                        <>
+                            <div className="flex items-center space-x-2">
+                                <div>
+                                    <h1>{user.displayName || ""}</h1>
+                                </div>
+                                <div className="avatar">
+                                    <div className="w-10 rounded-full">
+                                        <img src={user.photoURL || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"} alt="User Profile" />
+                                    </div>
+                                </div>
+                                <span className="text-lg font-semibold">{user.name}</span>
                             </div>
-                        </Link>
-                    </div>
+                            <button onClick={handlelogout} className="btn bg-red-500 text-white">
+                                Logout
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <Link to="/signin">
+                                <div className="p-2 bg-[#23be0a] rounded-lg inline-flex justify-center items-center gap-2.5">
+                                    <button className="text-center text-white text-lg font-semibold font-['Work Sans']">
+                                        Sign In
+                                    </button>
+                                </div>
+                            </Link>
+                            <Link to="/signup">
+                                <div className="p-2 bg-[#59c6d2] rounded-lg inline-flex justify-center items-center gap-2.5">
+                                    <button className="text-center text-white text-lg font-semibold font-['Work Sans']">
+                                        Sign Up
+                                    </button>
+                                </div>
+                            </Link>
+                        </>
+                    )}
                 </div>
             </div>
+            
+
+
         </div>
 
     );

@@ -1,7 +1,7 @@
 import {
     createBrowserRouter,
-    
-  } from "react-router-dom";
+
+} from "react-router-dom";
 import Root from "../Layouts/Root";
 import Errorpage from "../Shared/ErrorPage";
 import Home from "../Home/Home";
@@ -11,6 +11,7 @@ import SignIn from "../Auth/SignIn";
 import Signup from "../Auth/Signup";
 import CountrySpots from "../CountrySpots/CountrySpots";
 import SpotDetails from "../AllTouristspot/SpotDetails";
+import PrivateRoute from "../Provider/PrivateRoute";
 
 
 const Routes = createBrowserRouter([
@@ -22,7 +23,7 @@ const Routes = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>,
-                loader: ()=> fetch("http://localhost:5000/countries"),
+                loader: () => fetch("http://localhost:5000/countries"),
             },
             {
                 path: "/allspots",
@@ -30,11 +31,11 @@ const Routes = createBrowserRouter([
             },
             {
                 path: "/addspots",
-                element: <AddTouristSpot></AddTouristSpot>,
+                element: <PrivateRoute> <AddTouristSpot></AddTouristSpot> </PrivateRoute>,
             },
             {
                 path: "/signin",
-                element: <SignIn></SignIn> ,
+                element: <SignIn></SignIn>,
             },
             {
                 path: "/signup",
@@ -42,14 +43,14 @@ const Routes = createBrowserRouter([
             },
             {
                 path: "/country/:name",
-                element:<CountrySpots></CountrySpots> ,
+                element: <PrivateRoute> <CountrySpots></CountrySpots></PrivateRoute>,
             },
             {
                 path: "/spot/:id",
-                element:<SpotDetails></SpotDetails> ,
+                element: <SpotDetails></SpotDetails>,
             },
-            
-            
+
+
 
 
         ]
