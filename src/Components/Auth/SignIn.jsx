@@ -3,7 +3,7 @@ import { Typography, Input, Button } from "@material-tailwind/react";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/Authprovider";
-import { Toaster, toast } from 'sonner';
+import { toast } from 'sonner';
 
 const SignIn = () => {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -119,7 +119,7 @@ const SignIn = () => {
           </div>
 
           {/* Sign In Button */}
-          <Button color="gray" size="lg" className="mt-4" fullWidth>
+          <Button type="submit" color="gray" size="lg" className="mt-4" fullWidth>
             Sign In
           </Button>
         </form>

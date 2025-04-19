@@ -1,11 +1,60 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Typography, Input, Button } from "@material-tailwind/react";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Provider/Authprovider";
+import { toast } from 'sonner';
+
+
+
 
 const Signup = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisibility = () => setPasswordShown((cur) => !cur);
+
+  const {creategoogleUser,createUser} = useContext(AuthContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  //signup  
+  const handlesignup = e =>{
+    console.log("dd");
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const email = form.get("email");
+    const password = form.get("password");
+
+    createUser(email,password)
+    .then(result => {
+      navigate(location?.state ? location.state : "/");
+      toast.success('Successfully user created in!');
+      console.log(result.user);
+    })
+    .catch(error => {
+      toast.error('Failed to create user..');
+      console.error(error);
+
+    })
+  };
+
+
+  // google er login 
+  const handlegooglesignin = () => {
+    creategoogleUser()
+      .then(result => {
+        navigate(location?.state ? location.state : "/");
+        toast.success('Successfully logged in with Google!');
+        console.log(result.user);
+      })
+      .catch(error => {
+        toast.error('Failed to log in with Google');
+        console.error(error);
+      })
+  };
+
+
+
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
@@ -17,30 +66,7 @@ const Signup = () => {
           Create your account to explore the world with Skypath
         </Typography>
 
-        {/* ✅ Only Name, Email, Password kept inside the form */}
-        <form action="#" className="text-left">
-          {/* Name */}
-          <div className="mb-6">
-            <label htmlFor="name">
-              <Typography
-                variant="small"
-                className="mb-2 block font-medium text-gray-900"
-              >
-                Your Name
-              </Typography>
-            </label>
-            <Input
-              id="name"
-              color="gray"
-              size="lg"
-              type="text"
-              name="name"
-              placeholder="John Doe"
-              className="w-full placeholder:opacity-100 focus:border-t-primary border-t-blue-gray-200"
-              labelProps={{ className: "hidden" }}
-            />
-          </div>
-
+        <form onSubmit={handlesignup} className="text-left">
           <div className="mb-6">
             <label htmlFor="email">
               <Typography
@@ -54,6 +80,7 @@ const Signup = () => {
               id="email"
               color="gray"
               size="lg"
+              required
               type="email"
               name="email"
               placeholder="you@email.com"
@@ -73,6 +100,8 @@ const Signup = () => {
             </label>
             <Input
               id="password"
+              name="password"
+              required
               size="lg"
               placeholder="********"
               labelProps={{ className: "hidden" }}
@@ -90,7 +119,7 @@ const Signup = () => {
             />
           </div>
 
-          <Button color="gray" size="lg" className="mt-4" fullWidth>
+          <Button type="submit" color="gray" size="lg" className="mt-4" fullWidth>
             Create Account
           </Button>
         </form>
@@ -98,6 +127,7 @@ const Signup = () => {
 
         {/* Google Sign Up */}
         <Button
+          onClick={handlegooglesignin}
           variant="outlined"
           size="lg"
           className="mt-6 flex h-12 items-center justify-center gap-2"
@@ -111,7 +141,6 @@ const Signup = () => {
           Sign up with Google
         </Button>
 
-        {/* Already have an account */}
         <Typography
           variant="small"
           color="gray"

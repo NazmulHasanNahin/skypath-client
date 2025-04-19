@@ -23,41 +23,37 @@ const Authprovider = ({ children }) => {
     }
 
     //google sign in
-    const creategoogleUser = () =>{
+    const creategoogleUser = () => {
         setLoading(true);
-        return signInWithPopup(auth,googleProvider);
+        return signInWithPopup(auth, googleProvider);
     }
     //user login with mail and pass
-    const idsignin = (email,password) =>{
+    const idsignin = (email, password) => {
         setLoading(true);
-        return signInWithEmailAndPassword(auth,email,password);
+        return signInWithEmailAndPassword(auth, email, password);
     }
 
     //logout
 
-    const logout = () =>{
+    const logout = () => {
         setLoading(true);
         return signOut(auth);
     }
 
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
-            console.log("user= ",currentUser);
-
+            console.log("user= ", currentUser);
             setUser(currentUser);
             setLoading(false);
-
         });
-        return () => {
-            unsubscribe();
-        }
-    })
+        return () => unsubscribe();
+    }, []); // ✅ Must include dependency array
+
 
 
     //all pass kro 
     const authinfo = {
-        user, loading, createUser,creategoogleUser,idsignin,logout,
+        user, loading, createUser, creategoogleUser, idsignin, logout,
     }
 
 
