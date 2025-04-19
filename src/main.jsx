@@ -1,10 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
 import { RouterProvider } from 'react-router-dom'
 import Routes from './Components/Routes/Routes.jsx'
-import Authprovider from './Components/Provider/Authprovider.jsx'
+import Authprovider from './Components/Provider/AuthProvider'
 import { Toaster } from 'sonner'
 
 
