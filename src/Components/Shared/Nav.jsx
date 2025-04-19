@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { NavLink, useLocation, Link } from "react-router-dom";
-import { AuthContext } from "../Provider/Authprovider";
 import { toast } from 'sonner';
+import { AuthContext } from "../Context/AuthContext";
 
 const Nav = () => {
     const location = useLocation();

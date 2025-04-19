@@ -29,7 +29,7 @@ const AddTouristSpot = () => {
     };
     console.log(newSpot);
 
-    fetch("http://localhost:5000/add-spots", {
+    fetch("https://skypath-server.vercel.app/add-spots", {
       method: "POST",
       headers: {
         "content-type": "application/json"

@@ -10,7 +10,7 @@ const SpotDetails = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/spot/${id}`)
+    fetch(`https://skypath-server.vercel.app/spot/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setSpot(data);

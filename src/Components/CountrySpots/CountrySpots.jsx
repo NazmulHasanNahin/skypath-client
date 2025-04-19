@@ -9,7 +9,7 @@ const CountrySpots = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch(`http://localhost:5000/spots/${name}`)
+        fetch(`https://skypath-server.vercel.app/spots/${name}`)
             .then((res) => res.json())
             .then((data) => {
                 setSpots(data);

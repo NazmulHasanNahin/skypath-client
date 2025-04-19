@@ -2,8 +2,8 @@ import { useContext, useState } from "react";
 import { Typography, Input, Button } from "@material-tailwind/react";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../Provider/Authprovider";
 import { toast } from 'sonner';
+import { AuthContext } from "../Context/AuthContext";
 
 
 

@@ -9,7 +9,7 @@ const AllTouristspot = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch(`http://localhost:5000/all-spot`)
+        fetch(`https://skypath-server.vercel.app/all-spot`)
             .then((res) => res.json())
             .then((data) => {
                 setSpots(data);

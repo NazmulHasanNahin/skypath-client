@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { AuthContext } from "./Authprovider";
 import { GridLoader } from "react-spinners";
 import { Navigate, useLocation } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 
 
 const PrivateRoute = ({ children }) => {
